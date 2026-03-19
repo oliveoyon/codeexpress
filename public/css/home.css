@@ -2177,3 +2177,38 @@
       font-size: 13px;
       font-weight: 600;
     }
+    .portfolio-card-link {
+      display: block;
+    }
+
+    .portfolio-empty-card {
+      grid-column: 1 / -1;
+      padding: 32px;
+      border-radius: 28px;
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+    }
+
+    .portfolio-empty-card h3 {
+      margin-bottom: 12px;
+      color: var(--primary);
+      font-size: 24px;
+    }
+
+    .portfolio-empty-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+.brand-logo {
+      width: auto;
+      height: 46px;
+      object-fit: contain;
+}
+
+.footer-brand-logo {
+      width: auto;
+      height: 42px;
+      object-fit: contain;
+}

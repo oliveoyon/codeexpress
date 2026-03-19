@@ -9,15 +9,23 @@
     @stack('styles')
 </head>
 <body class="admin-body">
+    @php
+        $adminLogo = file_exists(public_path('CE.png')) ? asset('CE.png') : null;
+    @endphp
+
     <div class="admin-shell">
         <aside class="admin-sidebar" id="adminSidebar">
             <div class="admin-brand">
                 <a href="{{ route('admin.dashboard') }}" class="admin-brand-link">
-                    <span class="admin-brand-mark">C</span>
-                    <span>
-                        <strong>CodeExpress</strong>
-                        <small>Admin Console</small>
-                    </span>
+                    @if($adminLogo)
+                        <img src="{{ $adminLogo }}" alt="CodeExpress Admin" class="admin-brand-logo">
+                    @else
+                        <span class="admin-brand-mark">C</span>
+                        <span>
+                            <strong>CodeExpress</strong>
+                            <small>Admin Console</small>
+                        </span>
+                    @endif
                 </a>
             </div>
 
@@ -26,21 +34,21 @@
                     <span class="admin-nav-icon">&#9635;</span>
                     <span>Dashboard</span>
                 </a>
+                <a href="{{ route('admin.portfolios.index') }}" class="admin-nav-link {{ request()->routeIs('admin.portfolios.*') ? 'active' : '' }}">
+                    <span class="admin-nav-icon">&#128194;</span>
+                    <span>Portfolio</span>
+                </a>
+                <a href="{{ route('admin.newsletters.index') }}" class="admin-nav-link {{ request()->routeIs('admin.newsletters.*') ? 'active' : '' }}">
+                    <span class="admin-nav-icon">&#9998;</span>
+                    <span>Newsletter</span>
+                </a>
                 <a href="{{ route('admin.inquiries.index') }}" class="admin-nav-link {{ request()->routeIs('admin.inquiries.*') ? 'active' : '' }}">
                     <span class="admin-nav-icon">&#9993;</span>
                     <span>Inquiries</span>
                 </a>
-                <a href="#" class="admin-nav-link">
+                <a href="{{ route('home') }}" class="admin-nav-link">
                     <span class="admin-nav-icon">&#8599;</span>
                     <span>Homepage</span>
-                </a>
-                <a href="#" class="admin-nav-link">
-                    <span class="admin-nav-icon">&#128194;</span>
-                    <span>Portfolio</span>
-                </a>
-                <a href="#" class="admin-nav-link">
-                    <span class="admin-nav-icon">&#9998;</span>
-                    <span>Newsletter</span>
                 </a>
                 <a href="{{ route('admin.settings.general.edit') }}" class="admin-nav-link {{ request()->routeIs('admin.settings.general.*') ? 'active' : '' }}">
                     <span class="admin-nav-icon">&#9881;</span>
@@ -49,8 +57,17 @@
             </nav>
 
             <div class="admin-sidebar-card">
-                <small>Flexible foundation</small>
-                <p>This admin shell is ready for Breeze auth, CRUD pages, media uploads, and settings modules.</p>
+                <small>Site Snapshot</small>
+                <p>{{ $generalSetting?->tagline ?: 'Keep your public site content current and ready for visitors.' }}</p>
+                <div class="admin-sidebar-meta">
+                    @if($generalSetting?->email)
+                        <span>{{ $generalSetting->email }}</span>
+                    @endif
+                    @if($generalSetting?->phone)
+                        <span>{{ $generalSetting->phone }}</span>
+                    @endif
+                    <a href="{{ route('home') }}">Open website</a>
+                </div>
             </div>
         </aside>
 

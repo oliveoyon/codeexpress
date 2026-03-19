@@ -328,153 +328,41 @@
           </div>
 
           <div class="portfolio-grid">
-            <article class="portfolio-card reveal">
+            @forelse ($portfolios as $portfolio)
+            <a href="{{ route('portfolio.show', $portfolio) }}" class="portfolio-card reveal portfolio-card-link">
               <div class="portfolio-card-image">
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Students collaborating with digital learning tools">
+                <img src="{{ $portfolio->thumbnail }}" alt="{{ $portfolio->thumbnail_alt ?: $portfolio->title }}">
               </div>
               <div class="portfolio-card-body">
                 <div class="portfolio-card-top">
                   <div>
-                    <span class="portfolio-product-label">Education Product</span>
-                    <h3>Learning Management System</h3>
+                    <span class="portfolio-product-label">{{ $portfolio->category ?: 'Product Portfolio' }}</span>
+                    <h3>{{ $portfolio->title }}</h3>
                   </div>
-                  <div class="portfolio-product-icon">&#9998;</div>
+                  <div class="portfolio-product-icon">{!! $portfolio->icon ?: '&#9679;' !!}</div>
                 </div>
-                <p>
-                  A digital learning platform for courses, assessments, progress tracking, and student communication.
-                </p>
+                <p>{{ $portfolio->short_description }}</p>
+                @if (!empty($portfolio->tags))
                 <div class="portfolio-tags">
-                  <span class="portfolio-tag">Courses</span>
-                  <span class="portfolio-tag">Assessments</span>
-                  <span class="portfolio-tag">Student portal</span>
+                  @foreach (collect($portfolio->tags)->take(3) as $tag)
+                  <span class="portfolio-tag">{{ $tag }}</span>
+                  @endforeach
                 </div>
-                <span class="portfolio-note">Built for structured digital learning delivery</span>
+                @endif
+                @if ($portfolio->excerpt_note)
+                <span class="portfolio-note">{{ $portfolio->excerpt_note }}</span>
+                @endif
               </div>
-            </article>
-
-            <article class="portfolio-card reveal">
-              <div class="portfolio-card-image">
-                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" alt="Restaurant team using a digital ordering and management system">
-              </div>
-              <div class="portfolio-card-body">
-                <div class="portfolio-card-top">
-                  <div>
-                    <span class="portfolio-product-label">Restaurant Product</span>
-                    <h3>Restaurant Management System</h3>
-                  </div>
-                  <div class="portfolio-product-icon">&#127869;</div>
-                </div>
-                <p>
-                  An integrated restaurant solution for menu management, table service, kitchen flow, and order tracking.
-                </p>
-                <div class="portfolio-tags">
-                  <span class="portfolio-tag">POS</span>
-                  <span class="portfolio-tag">Kitchen queue</span>
-                  <span class="portfolio-tag">Order flow</span>
-                </div>
-                <span class="portfolio-note">Designed for smoother service operations</span>
-              </div>
-            </article>
-
-            <article class="portfolio-card reveal">
-              <div class="portfolio-card-image">
-                <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80" alt="Customer browsing products in an e-commerce interface">
-              </div>
-              <div class="portfolio-card-body">
-                <div class="portfolio-card-top">
-                  <div>
-                    <span class="portfolio-product-label">Commerce Product</span>
-                    <h3>Ecommerce Solution</h3>
-                  </div>
-                  <div class="portfolio-product-icon">&#128722;</div>
-                </div>
-                <p>
-                  A scalable online commerce platform for catalog management, orders, payments, and customer accounts.
-                </p>
-                <div class="portfolio-tags">
-                  <span class="portfolio-tag">Catalog</span>
-                  <span class="portfolio-tag">Payments</span>
-                  <span class="portfolio-tag">Customer portal</span>
-                </div>
-                <span class="portfolio-note">Built for modern digital retail experiences</span>
-              </div>
-            </article>
-
-            <article class="portfolio-card reveal">
-              <div class="portfolio-card-image">
-                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=900&q=80" alt="Accounting workspace with invoices and financial reporting screens">
-              </div>
-              <div class="portfolio-card-body">
-                <div class="portfolio-card-top">
-                  <div>
-                    <span class="portfolio-product-label">Finance Product</span>
-                    <h3>Accounting & Invoicing System</h3>
-                  </div>
-                  <div class="portfolio-product-icon">&#128179;</div>
-                </div>
-                <p>
-                  A financial operations product covering invoices, payments, ledger tracking, and reporting visibility.
-                </p>
-                <div class="portfolio-tags">
-                  <span class="portfolio-tag">Invoices</span>
-                  <span class="portfolio-tag">Payments</span>
-                  <span class="portfolio-tag">Finance reports</span>
-                </div>
-                <span class="portfolio-note">Built for cleaner financial control</span>
-              </div>
-            </article>
-
-            <article class="portfolio-card reveal">
-              <div class="portfolio-card-image">
-                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=80" alt="HR team managing payroll and people records on a digital system">
-              </div>
-              <div class="portfolio-card-body">
-                <div class="portfolio-card-top">
-                  <div>
-                    <span class="portfolio-product-label">People Product</span>
-                    <h3>HR & Payroll Platform</h3>
-                  </div>
-                  <div class="portfolio-product-icon">&#128188;</div>
-                </div>
-                <p>
-                  A workforce platform for employee records, attendance, payroll processing, and leave management.
-                </p>
-                <div class="portfolio-tags">
-                  <span class="portfolio-tag">HR records</span>
-                  <span class="portfolio-tag">Payroll</span>
-                  <span class="portfolio-tag">Attendance</span>
-                </div>
-                <span class="portfolio-note">Built to simplify internal people operations</span>
-              </div>
-            </article>
-
-            <article class="portfolio-card reveal">
-              <div class="portfolio-card-image">
-                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=80" alt="Warehouse inventory and logistics operations managed digitally">
-              </div>
-              <div class="portfolio-card-body">
-                <div class="portfolio-card-top">
-                  <div>
-                    <span class="portfolio-product-label">Operations Product</span>
-                    <h3>Inventory & Warehouse System</h3>
-                  </div>
-                  <div class="portfolio-product-icon">&#128230;</div>
-                </div>
-                <p>
-                  A stock and warehouse management product for item control, movement tracking, and supply visibility.
-                </p>
-                <div class="portfolio-tags">
-                  <span class="portfolio-tag">Inventory</span>
-                  <span class="portfolio-tag">Stock movement</span>
-                  <span class="portfolio-tag">Warehouse ops</span>
-                </div>
-                <span class="portfolio-note">Built for reliable operational traceability</span>
-              </div>
-            </article>
-
+            </a>
+            @empty
+            <div class="portfolio-empty-card reveal">
+              <h3>No portfolio items published yet</h3>
+              <p>Portfolio products will appear here as soon as they are published from the admin panel.</p>
+            </div>
+            @endforelse
           </div>
           <div class="section-actions reveal">
-            <a href="portfolio.html" class="btn show-more-btn">Show More</a>
+            <a href="{{ route('portfolio.index') }}" class="btn show-more-btn">Show More</a>
           </div>
         </div>
       </div>
@@ -633,68 +521,40 @@
               <span class="eyebrow">Newsletter</span>
               <h2>Insights, product thinking, and digital updates.</h2>
               <p>
-                A static listing for now, designed as the future home for articles, updates,
-                product notes, and delivery insights from CodeExpress.
+                A curated article preview designed to surface the latest updates, insights,
+                product notes, and delivery perspectives from CodeExpress.
               </p>
             </div>
-            <a href="#contact" class="btn btn-secondary reveal">Subscribe Later</a>
+            <a href="{{ route('newsletter.index') }}" class="btn btn-secondary reveal">Browse Articles</a>
           </div>
 
           <div class="newsletter-grid">
+            @forelse ($newsletters as $newsletter)
             <article class="newsletter-card reveal">
+              @if ($newsletter->image)
               <div class="newsletter-image">
-                <img src="https://images.unsplash.com/photo-1516321165247-4aa89a48be28?auto=format&fit=crop&w=900&q=80" alt="Team reviewing digital product strategy and content planning">
+                <img src="{{ $newsletter->image }}" alt="{{ $newsletter->image_alt ?: $newsletter->title }}">
               </div>
+              @endif
               <div class="newsletter-body">
                 <div class="newsletter-meta">
-                  <span class="newsletter-date">March 2026</span>
-                  <span class="card-badge blue">Product Update</span>
+                  <span class="newsletter-date">{{ optional($newsletter->published_at)->format('F Y') ?: 'Draft' }}</span>
+                  <span class="card-badge blue">{{ $newsletter->category ?: 'Newsletter' }}</span>
                 </div>
-                <h3>Designing software around real operational workflows</h3>
-                <p>
-                  A short look at how workflow mapping improves product clarity, usability, and delivery outcomes.
-                </p>
-                <a href="#contact" class="newsletter-link">Read article</a>
+                <h3>{{ $newsletter->title }}</h3>
+                <p>{{ $newsletter->excerpt }}</p>
+                <a href="{{ route('newsletter.show', $newsletter) }}" class="newsletter-link">Read article</a>
               </div>
             </article>
-
-            <article class="newsletter-card reveal">
-              <div class="newsletter-image">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="Analytics dashboard and reporting interface on a laptop screen">
-              </div>
-              <div class="newsletter-body">
-                <div class="newsletter-meta">
-                  <span class="newsletter-date">March 2026</span>
-                  <span class="card-badge green">Insight</span>
-                </div>
-                <h3>Why reporting dashboards fail without decision context</h3>
-                <p>
-                  Better dashboards come from understanding the decisions teams need to make, not only the data they store.
-                </p>
-                <a href="#contact" class="newsletter-link">Read article</a>
-              </div>
-            </article>
-
-            <article class="newsletter-card reveal">
-              <div class="newsletter-image">
-                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" alt="Developers working on a modern software platform">
-              </div>
-              <div class="newsletter-body">
-                <div class="newsletter-meta">
-                  <span class="newsletter-date">March 2026</span>
-                  <span class="card-badge orange">Engineering</span>
-                </div>
-                <h3>Modernizing business platforms without breaking continuity</h3>
-                <p>
-                  A practical view on upgrading legacy systems while preserving service continuity and long-term maintainability.
-                </p>
-                <a href="#contact" class="newsletter-link">Read article</a>
-              </div>
-            </article>
-
+            @empty
+            <div class="portfolio-empty-card reveal">
+              <h3>No newsletter articles published yet</h3>
+              <p>Newsletter articles will appear here as soon as they are published from the admin panel.</p>
+            </div>
+            @endforelse
           </div>
           <div class="section-actions reveal">
-            <a href="newsletter.html" class="btn show-more-btn">Show More</a>
+            <a href="{{ route('newsletter.index') }}" class="btn show-more-btn">Show More</a>
           </div>
         </div>
       </div>
@@ -733,7 +593,7 @@
                 <span class="smart-badge orange">Discovery ready</span>
                 <span class="smart-badge blue">Response-focused</span>
               </div>
-                            @if(session('contact_success'))
+              @if(session('contact_success'))
               <div class="contact-feedback success">{{ session('contact_success') }}</div>
               @endif
 
@@ -797,62 +657,67 @@
 @push('scripts')
     <script>
 const mobileToggle = document.getElementById("mobileToggle");
-    const mobileMenu = document.getElementById("mobileMenu");
-    const internalLinks = document.querySelectorAll('a[href^="#"]');
-    const sectionLinks = document.querySelectorAll('.nav-links a[href^="#"], .nav-menu a[href^="#"]');
-    const trackedSections = [...sectionLinks]
-      .map((link) => document.querySelector(link.getAttribute("href")))
-      .filter(Boolean);
+const mobileMenu = document.getElementById("mobileMenu");
+const internalLinks = document.querySelectorAll('a[href^="#"]');
+const sectionLinks = document.querySelectorAll('.nav-links a[href^="#"], .nav-menu a[href^="#"]');
+const trackedSections = [...sectionLinks]
+  .map((link) => document.querySelector(link.getAttribute("href")))
+  .filter(Boolean);
 
-    mobileToggle.addEventListener("click", function () {
-      const expanded = this.getAttribute("aria-expanded") === "true";
-      this.setAttribute("aria-expanded", !expanded);
-      mobileMenu.classList.toggle("active");
-    });
+if (mobileToggle && mobileMenu) {
+  mobileToggle.addEventListener("click", function () {
+    const expanded = this.getAttribute("aria-expanded") === "true";
+    this.setAttribute("aria-expanded", String(!expanded));
+    mobileMenu.classList.toggle("active");
+  });
+}
 
-    internalLinks.forEach((link) => {
-      const targetSelector = link.getAttribute("href");
-      const target = targetSelector ? document.querySelector(targetSelector) : null;
-      if (!target) return;
+internalLinks.forEach((link) => {
+  const targetSelector = link.getAttribute("href");
+  const target = targetSelector ? document.querySelector(targetSelector) : null;
+  if (!target) return;
 
-      link.addEventListener("click", (event) => {
-        event.preventDefault();
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
 
-        const headerOffset = 96;
-        const targetTop = target.getBoundingClientRect().top + window.scrollY - headerOffset;
-        window.scrollTo({ top: Math.max(targetTop, 0), behavior: "smooth" });
+    const headerOffset = 96;
+    const targetTop = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+    window.scrollTo({ top: Math.max(targetTop, 0), behavior: "smooth" });
 
-        mobileMenu.classList.remove('active');
-        mobileToggle.setAttribute("aria-expanded", "false");
-        history.replaceState(null, "", window.location.pathname + window.location.search);
-      });
-    });
+    if (mobileMenu && mobileToggle) {
+      mobileMenu.classList.remove("active");
+      mobileToggle.setAttribute("aria-expanded", "false");
+    }
 
-    const setActiveSectionLink = () => {
-      let currentId = "#home";
+    history.replaceState(null, "", window.location.pathname + window.location.search);
+  });
+});
 
-      trackedSections.forEach((section) => {
-        const sectionTop = section.offsetTop - 140;
-        if (window.scrollY >= sectionTop) {
-          currentId = `#${section.id}`;
-        }
-      });
+const setActiveSectionLink = () => {
+  let currentId = "#home";
 
-      sectionLinks.forEach((link) => {
-        link.classList.toggle("active", link.getAttribute("href") === currentId);
-      });
-    };
+  trackedSections.forEach((section) => {
+    const sectionTop = section.offsetTop - 140;
+    if (window.scrollY >= sectionTop) {
+      currentId = `#${section.id}`;
+    }
+  });
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("active");
-        }
-      });
-    }, { threshold: 0.12 });
+  sectionLinks.forEach((link) => {
+    link.classList.toggle("active", link.getAttribute("href") === currentId);
+  });
+};
 
-    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-    window.addEventListener("scroll", setActiveSectionLink, { passive: true });
-    setActiveSectionLink();
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("active");
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+window.addEventListener("scroll", setActiveSectionLink, { passive: true });
+setActiveSectionLink();
     </script>
 @endpush
